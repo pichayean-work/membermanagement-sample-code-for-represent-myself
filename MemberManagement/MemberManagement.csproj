@@ -185,7 +185,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Entity\AccessTokens.cs">
       <DependentUpon>MacusY.tt</DependentUpon>
     </Compile>
