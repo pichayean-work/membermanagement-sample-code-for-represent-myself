@@ -1,0 +1,2 @@
+C:\Users\Thinkpad X250\source\repos\MemberManagement\MemberManagement.Tests\obj\Debug\MemberManagement.Tests.csprojAssemblyReference.cache
+C:\Users\Thinkpad X250\source\repos\MemberManagement\MemberManagement.Tests\obj\Debug\MemberManagement.Tests.csproj.CoreCompileInputs.cache

@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MacusYModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AccessTokens">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="token" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="exprise" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="memberID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Members" Relationship="Self.FK_AccessTokens_Members" FromRole="AccessTokens" ToRole="Members" />
+  </EntityType>
+  <EntityType Name="Members">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="role" Type="MacusYModel.RoleAccount" Nullable="false" />
+    <Property Name="created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="image_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AccessTokens" Relationship="Self.FK_AccessTokens_Members" FromRole="Members" ToRole="AccessTokens" />
+  </EntityType>
+  <EntityType Name="test">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="createdate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <Association Name="FK_AccessTokens_Members">
+    <End Role="Members" Type="Self.Members" Multiplicity="1" />
+    <End Role="AccessTokens" Type="Self.AccessTokens" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Members">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="AccessTokens">
+        <PropertyRef Name="memberID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MacusYEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AccessTokens" EntityType="Self.AccessTokens" />
+    <EntitySet Name="Members" EntityType="Self.Members" />
+    <EntitySet Name="test" EntityType="Self.test" />
+    <AssociationSet Name="FK_AccessTokens_Members" Association="Self.FK_AccessTokens_Members">
+      <End Role="Members" EntitySet="Members" />
+      <End Role="AccessTokens" EntitySet="AccessTokens" />
+    </AssociationSet>
+  </EntityContainer>
+  <EnumType Name="RoleAccount" UnderlyingType="Int16">
+    <Member Name="Member" Value="1" />
+    <Member Name="Employee" Value="2" />
+    <Member Name="Admin" Value="3" />
+  </EnumType>
+</Schema>
